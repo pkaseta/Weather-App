@@ -1,9 +1,10 @@
 .navigationBar{
-    background-color: #080a35;
+    background-color: #503971;
    
 }
 .searchBar {
     display: flex;
+    width: 45%;
 }
 @media (min-width: 992px) {
 .navbar-expand-lg .navbar-collapse {

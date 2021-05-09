@@ -1,3 +1,34 @@
 .homePage{
+    height: 75vh;
     background-color: #E4E5FF;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+.weatherCard{
+    width: 18rem;
+    height: 70%;
+    border-radius: 20px;
+    background: linear-gradient(#FFE4F2, #FFFEE4, #E4FFF1);
+    box-shadow: 0 9px 8px black;
+    text-align: center;
+    
+}
+.imageContainer{
+    position: relative;
+    display: flex;
+    height: 100px;
+    width: 100px;
+    margin: auto; 
+}
+.temperature{
+    font-family: 'Open Sans', sans-serif;
+    font-size: 200%;
+    font-weight: bolder;
+    position:absolute;
+    bottom: 0;
+    right: 0;
+}
+.hourly{
+    font-size: 200%;
 }

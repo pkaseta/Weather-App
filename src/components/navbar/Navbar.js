@@ -22,7 +22,7 @@ function NavBar() {
                     </NavDropdown>
                 </Nav>
                 <Form className="searchBar">
-                    <FormControl inline type="text" placeholder="Search" className="mr-sm-2" />
+                    <FormControl inline type="text" placeholder="Search City, State, or Zip" className="mr-sm-3" />
                     <Button inline variant="outline-light">Search</Button>
                 </Form>
             </Navbar.Collapse>
