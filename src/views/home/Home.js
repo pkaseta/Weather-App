@@ -6,6 +6,14 @@ const apiKey = "ff4bdb817f28ac7fc9e66ee56569aa6d";
 
 function Home() {
   const [localWeatherData, setLocalWeatherData] = useState({});
+  const [weatherData, setWeatherData] = useState({});
+  const [hourlyWeather, setHourlyWeather] = useState({
+    day1: {},
+    day2: {},
+    day3: {},
+    day4: {},
+    day5: {},
+  });
 
   useEffect(async () => {
     getLocalWeather();
@@ -21,6 +29,7 @@ function Home() {
 
   function onSuccess(position) {
     getLocalWeatherData(position.coords.latitude, position.coords.longitude);
+    getData(position.coords.latitude, position.coords.longitude);
   }
 
   function onFailure(err) {
@@ -32,18 +41,23 @@ function Home() {
       `https://api.openweathermap.org/data/2.5/weather?&lat=${lat}&lon=${lng}&appid=${apiKey}`
     );
     const data = await res.json();
-    setLocalWeatherData({ data });
-    console.log(data);
+    setLocalWeatherData(data);
   }
 
-  console.log(localWeatherData);
-
+  async function getData(lat, lng) {
+    let res = await fetch(
+      `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lng}&appid=${apiKey}`
+    );
+    const data = await res.json();
+    setWeatherData(data);
+  }
+  console.log(weatherData);
   return (
     <div className="homePage">
       <Card className="weatherCard">
         <Card.Body>
           <Card.Title>
-            {localWeatherData.data ? localWeatherData.data.name : ""}
+            {localWeatherData.name ? localWeatherData.name : ""}
           </Card.Title>
           <div className="imageContainer">
             <Image
@@ -51,17 +65,15 @@ function Home() {
               style={{ height: "100px", width: "100px", margin: "auto" }}
             />
             <div className="temperature">
-              {localWeatherData.data
-                ? Math.floor((localWeatherData.data.main.temp - 273.15) * 9) /
-                    5 +
-                  32
+              {localWeatherData.main
+                ? Math.floor((localWeatherData.main.temp - 273.15) * 9) / 5 + 32
                 : ""}
               {"\u00b0"}
             </div>
           </div>
           <Card.Subtitle className="mb-2 text-muted">
-            {localWeatherData.data
-              ? localWeatherData.data.weather[0].description
+            {localWeatherData.weather
+              ? localWeatherData.weather[0].description
               : ""}
           </Card.Subtitle>
           <div className="hourly">
@@ -87,9 +99,24 @@ function Home() {
           </Card.Subtitle>
           <div className="hourly">
             <Card.Text>
-              1 PM 80{"\u00b0"}
-              <br />2 PM 83{"\u00b0"}
-              <br />3 PM 86{"\u00b0"}
+              {weatherData.hourly ? (
+                <div>
+                  {weatherData.hourly.map((hour, index) => {
+                    if (index > 0 && index < 6) {
+                      return (
+                        <p>
+                          {Math.floor((hour.temp - 273.15) * 9) / 5 +
+                            32 +
+                            "\u00b0"}
+                        </p>
+                      );
+                      console.log(hour);
+                    }
+                  })}
+                </div>
+              ) : (
+                ""
+              )}
             </Card.Text>
           </div>
           {/* <Card.Link href="#">Card Link</Card.Link>
