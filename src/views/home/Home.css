@@ -1,34 +1,60 @@
-.homePage{
-    height: 75vh;
-    background-color: #E4E5FF;
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
+.homePage {
+  height: 100vh;
+  background-color: #e4e5ff;
+  justify-content: space-around;
+  align-items: center;
 }
-.weatherCard{
-    width: 18rem;
-    height: 70%;
-    border-radius: 20px;
-    background: linear-gradient(#FFE4F2, #FFFEE4, #E4FFF1);
-    box-shadow: 0 9px 8px black;
-    text-align: center;
-    
+.weatherCard1 {
+  margin: auto;
+  width: 50%;
+  height: 70%;
+  /* border-radius: 20px; */
+  /* background: linear-gradient(#FFE4F2, #FFFEE4, #E4FFF1); */
+  box-shadow: 0 9px 8px black;
+  text-align: center;
+  margin-top: 50px;
 }
-.imageContainer{
-    position: relative;
-    display: flex;
-    height: 100px;
-    width: 100px;
-    margin: auto; 
+.weatherCard2 {
+  display: flex;
+
+  margin: auto;
+  width: 70%;
+  height: 70%;
+  /* border-radius: 20px; */
+  background: linear-gradient(#ffe4f2, #fffee4, #e4fff1);
+  box-shadow: 0 9px 8px black;
+  text-align: center;
+  margin-top: 50px;
 }
-.temperature{
-    font-family: 'Open Sans', sans-serif;
-    font-size: 200%;
-    font-weight: bolder;
-    position:absolute;
-    bottom: 0;
-    right: 0;
+.imageContainer {
+  position: relative;
+  display: flex;
+  height: 100px;
+  width: 100px;
+  margin: auto;
 }
-.hourly{
-    font-size: 200%;
+.temperature {
+  font-family: "Open Sans", sans-serif;
+  font-size: 200%;
+  font-weight: bolder;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+}
+.feelsLike {
+  font-family: "Open Sans", sans-serif;
+  font-size: 80%;
+  font-weight: bolder;
+  /* position:absolute; */
+  /* bottom: 0;
+    right: 0; */
+}
+.hourly {
+  font-weight: bold;
+  flex: 1 1 auto;
+  width: 100%;
+  font-size: 120%;
+}
+.hourlyForecast {
+  flex: 1 1 auto;
 }
