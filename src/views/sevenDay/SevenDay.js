@@ -72,7 +72,9 @@ function SevenDay() {
                     </div>
                     <div className="humidity">Humidity: {hour.humidity}%</div>
                     <div className="date">
-                      {dateObject.toLocaleString("en-US", { weekday: "long" })}
+                      {dateObject
+                        .toLocaleString("en-US", { weekday: "long" })
+                        .toUpperCase()}
                     </div>
                   </div>
                 </div>
