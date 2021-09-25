@@ -5,70 +5,18 @@ import { Image } from "react-bootstrap";
 import tempCardBackground from "../../assets/download1.jpg";
 import "dotenv/config";
 
-const apiKey = process.env.REACT_APP_API_KEY;
-console.log(apiKey);
-let sunsetTime,
-  sunriseTime,
-  currentDay = new Date(),
-  currentHour = currentDay.getHours();
 
-function Home() {
-  const [localWeatherData, setLocalWeatherData] = useState({});
-  const [hourlyWeatherData, setHourlyWeatherData] = useState({});
-  const [sunriseTimeStamp, setSunriseTimeStamp] = useState();
-  const [sunsetTimeStamp, setSunsetTimeStamp] = useState();
+function Home(props) {
+  const { localWeatherData, hourlyWeatherData, sunriseTime, sunsetTime, currentHour, dailyWeatherData } = props
 
-  useEffect(async () => {
-    getLocalWeather();
-  }, []);
-
-  function getLocalWeather() {
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(onSuccess, onFailure);
-    } else {
-      console.log("your browser does not support geolocation API");
-    }
-  }
-
-  function onSuccess(position) {
-    getLocalWeatherData(position.coords.latitude, position.coords.longitude);
-    getHourlyWeatherData(position.coords.latitude, position.coords.longitude);
-  }
-
-  function onFailure(err) {
-    console.log(err.message);
-  }
-
-  async function getLocalWeatherData(lat, lng) {
-    let res = await fetch(
-      `https://api.openweathermap.org/data/2.5/weather?&lat=${lat}&lon=${lng}&appid=${apiKey}`
-    );
-    const data = await res.json();
-    setLocalWeatherData({ data });
-    setSunriseTimeStamp(data.sys.sunrise * 1000);
-    setSunsetTimeStamp(data.sys.sunset * 1000);
-    sunriseTime = new Date(sunriseTimeStamp);
-    sunsetTime = new Date(sunsetTimeStamp);
-    console.log(data.sys.sunset);
-  }
-
-  async function getHourlyWeatherData(lat, lng) {
-    let res = await fetch(
-      `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lng}&exclude=current,minutely,daily,alerts&appid=${apiKey}
-      `
-    );
-    const data = await res.json();
-    setHourlyWeatherData(data);
-  }
-
-  console.log(localWeatherData);
+  console.log(localWeatherData, "From Home");
   console.log(sunsetTime);
   return (
     <>
       {localWeatherData.data && hourlyWeatherData && (
         <div className="homePage">
           <div className="title d-flex justify-content-center">
-            <h1>{localWeatherData.data ? localWeatherData.data.name : ""}</h1>
+            {/* <h1>{localWeatherData.data ? localWeatherData.data.name : ""}</h1> */}
           </div>
           <div className="cardContainer">
             <Card
@@ -92,9 +40,9 @@ function Home() {
                   <div className="temperature" style={{ color: "gray" }}>
                     {localWeatherData.data
                       ? Math.floor(
-                          ((localWeatherData.data.main.temp - 273.15) * 9) / 5 +
-                            32
-                        )
+                        ((localWeatherData.data.main.temp - 273.15) * 9) / 5 +
+                        32
+                      )
                       : ""}
                     {"\u00b0"}
                   </div>
@@ -104,11 +52,11 @@ function Home() {
                     Feels like:{" "}
                     {localWeatherData.data
                       ? Math.floor(
-                          ((localWeatherData.data.main.feels_like - 273.15) *
-                            9) /
-                            5 +
-                            32
-                        )
+                        ((localWeatherData.data.main.feels_like - 273.15) *
+                          9) /
+                        5 +
+                        32
+                      )
                       : ""}
                     {"\u00b0"}
                   </div>
@@ -162,11 +110,11 @@ function Home() {
                       <span>Max-Temp</span>{" "}
                       {localWeatherData.data
                         ? Math.floor(
-                            ((localWeatherData.data.main.temp_max - 273.15) *
-                              9) /
-                              5 +
-                              32
-                          )
+                          ((localWeatherData.data.main.temp_max - 273.15) *
+                            9) /
+                          5 +
+                          32
+                        )
                         : ""}
                       {"\u00b0"}
                     </ListGroup.Item>
@@ -174,11 +122,11 @@ function Home() {
                       <span>Min-Temp</span>{" "}
                       {localWeatherData.data
                         ? Math.floor(
-                            ((localWeatherData.data.main.temp_min - 273.15) *
-                              9) /
-                              5 +
-                              32
-                          )
+                          ((localWeatherData.data.main.temp_min - 273.15) *
+                            9) /
+                          5 +
+                          32
+                        )
                         : ""}
                       {"\u00b0"}
                     </ListGroup.Item>
@@ -216,42 +164,42 @@ function Home() {
                     <div className="d-flex w-200">
                       {hourlyWeatherData.hourly
                         ? hourlyWeatherData.hourly.map((time, index) =>
-                            index > 0 && index < 8 ? (
-                              <div className="d-flex-column hourlyForecast">
-                                <div className="d-flex">
-                                  {
-                                    <Image
-                                      src={`http://openweathermap.org/img/wn/${hourlyWeatherData.hourly[index].weather[0].icon}@2x.png`}
-                                      style={{
-                                        height: "100px",
-                                        width: "100px",
-                                        margin: "auto",
-                                      }}
-                                    />
-                                  }
-                                </div>
-                                <h3 className="align-self-end">
-                                  {Math.floor(
-                                    ((time.temp - 273.15) * 9) / 5 + 32
-                                  )}
-                                  {"\u00b0"}
-                                </h3>
+                          index > 0 && index < 8 ? (
+                            <div className="d-flex-column hourlyForecast">
+                              <div className="d-flex">
+                                {
+                                  <Image
+                                    src={`http://openweathermap.org/img/wn/${hourlyWeatherData.hourly[index].weather[0].icon}@2x.png`}
+                                    style={{
+                                      height: "100px",
+                                      width: "100px",
+                                      margin: "auto",
+                                    }}
+                                  />
+                                }
+                              </div>
+                              <h3 className="align-self-end">
+                                {Math.floor(
+                                  ((time.temp - 273.15) * 9) / 5 + 32
+                                )}
+                                {"\u00b0"}
+                              </h3>
 
-                                <br />
+                              <br />
 
-                                {currentHour + index > 12 &&
+                              {currentHour + index > 12 &&
                                 currentHour + index < 25
-                                  ? currentHour + index === 24
-                                    ? currentHour + index - 12 + ":00am"
-                                    : currentHour + index - 12 + ":00pm"
-                                  : currentHour + index > 24
+                                ? currentHour + index === 24
+                                  ? currentHour + index - 12 + ":00am"
+                                  : currentHour + index - 12 + ":00pm"
+                                : currentHour + index > 24
                                   ? currentHour + index - 24 + ":00am"
                                   : currentHour + index + ":00am"}
-                              </div>
-                            ) : (
-                              ""
-                            )
+                            </div>
+                          ) : (
+                            ""
                           )
+                        )
                         : ""}
                     </div>
                   </Card.Text>
