@@ -8,10 +8,10 @@ import {
   Button,
   Image,
 } from "react-bootstrap";
-import Sunshine from "../../assets/sunshine.png";
 import "dotenv/config";
 
 const apiKey = process.env.REACT_APP_API_KEY;
+const geoAccessKey = process.env.GEOCODE_ACCESS_KEY;
 function NavBar() {
   const [localWeatherData, setLocalWeatherData] = useState({});
 
@@ -35,12 +35,14 @@ function NavBar() {
     console.log(err.message);
   }
 
-  async function getLocalWeatherData(lat, lng) {
+  async function getLocalWeatherData() {
     let res = await fetch(
-      `https://api.openweathermap.org/data/2.5/weather?&lat=${lat}&lon=${lng}&appid=${apiKey}`
+      `http://api.positionstack.com/v1/forward?access_key=79bc750b380ed9ae127c286c7694de8d&query=Mount Clemens MI`
+      // `https://api.openweathermap.org/data/2.5/weather?&lat=${lat}&lon=${lng}&appid=${apiKey}`
     );
     const data = await res.json();
-    setLocalWeatherData({ data });
+    console.log(data);
+    // setLocalWeatherData({ data });
   }
   return (
     <Navbar inline className="navigationBar" variant="dark" expand="lg">

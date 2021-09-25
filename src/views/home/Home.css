@@ -8,19 +8,16 @@
   margin: auto;
   width: 50%;
   height: 70%;
-  /* border-radius: 20px; */
-  /* background: linear-gradient(#FFE4F2, #FFFEE4, #E4FFF1); */
   box-shadow: 0 9px 8px black;
   text-align: center;
   margin-top: 50px;
 }
 .weatherCard2 {
   display: flex;
-
+  overflow-x: scroll;
   margin: auto;
   width: 70%;
   height: 70%;
-  /* border-radius: 20px; */
   background: linear-gradient(#ffe4f2, #fffee4, #e4fff1);
   box-shadow: 0 9px 8px black;
   text-align: center;
@@ -45,9 +42,6 @@
   font-family: "Open Sans", sans-serif;
   font-size: 80%;
   font-weight: bolder;
-  /* position:absolute; */
-  /* bottom: 0;
-    right: 0; */
 }
 .hourly {
   font-weight: bold;
