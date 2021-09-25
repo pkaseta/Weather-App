@@ -1,21 +1,12 @@
 import React, { useState, useEffect } from "react";
-import {
-  Navbar,
-  Nav,
-  NavDropdown,
-  Form,
-  FormControl,
-  Button,
-  Image,
-} from "react-bootstrap";
-import Sunshine from "../../assets/sunshine.png";
+import { Navbar, Nav, Form, FormControl, Button } from "react-bootstrap";
 import "dotenv/config";
 
 const apiKey = process.env.REACT_APP_API_KEY;
 function NavBar() {
   const [localWeatherData, setLocalWeatherData] = useState({});
 
-  useEffect(async () => {
+  useEffect(() => {
     getHourlyWeather();
   }, []);
 
