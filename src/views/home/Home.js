@@ -60,6 +60,7 @@ function Home() {
     const data = await res.json();
     setHourlyWeatherData(data);
   }
+
   console.log(localWeatherData);
   console.log(sunsetTime);
   return (
@@ -132,10 +133,11 @@ function Home() {
                       %
                     </ListGroup.Item>
                     <ListGroup.Item className="d-flex justify-content-between">
-                      <span>Pressure</span>{" "}
+                      <span>Cloud Coverage</span>{" "}
                       {localWeatherData.data
-                        ? localWeatherData.data.main.pressure
+                        ? localWeatherData.data.clouds.all
                         : ""}
+                      %
                     </ListGroup.Item>
                     <ListGroup.Item className="d-flex justify-content-between">
                       <span>Wind Speed</span>
