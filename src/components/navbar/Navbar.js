@@ -1,13 +1,5 @@
 import React, { useState, useEffect } from "react";
-import {
-  Navbar,
-  Nav,
-  NavDropdown,
-  Form,
-  FormControl,
-  Button,
-  Image,
-} from "react-bootstrap";
+import { Navbar, Nav, Form, FormControl, Button } from "react-bootstrap";
 import "dotenv/config";
 
 const apiKey = process.env.REACT_APP_API_KEY;
@@ -15,7 +7,7 @@ const geoAccessKey = process.env.GEOCODE_ACCESS_KEY;
 function NavBar() {
   const [localWeatherData, setLocalWeatherData] = useState({});
 
-  useEffect(async () => {
+  useEffect(() => {
     getHourlyWeather();
   }, []);
 

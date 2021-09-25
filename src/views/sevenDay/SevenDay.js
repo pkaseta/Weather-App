@@ -1,14 +1,13 @@
 import React, { useEffect, useState } from "react";
 import "../sevenDay/SevenDay.css";
 import "dotenv/config";
-import { ThemeProvider } from "react-bootstrap";
 
 const apiKey = process.env.REACT_APP_API_KEY;
 
 function SevenDay() {
   const [hourlyWeatherData, setHourlyWeatherData] = useState({});
 
-  useEffect(async () => {
+  useEffect(() => {
     getHourlyWeather();
   }, []);
 

@@ -6,7 +6,6 @@ import tempCardBackground from "../../assets/download1.jpg";
 import "dotenv/config";
 
 const apiKey = process.env.REACT_APP_API_KEY;
-console.log(apiKey);
 let sunsetTime,
   sunriseTime,
   currentDay = new Date(),
@@ -18,7 +17,7 @@ function Home() {
   const [sunriseTimeStamp, setSunriseTimeStamp] = useState();
   const [sunsetTimeStamp, setSunsetTimeStamp] = useState();
 
-  useEffect(async () => {
+  useEffect(() => {
     getLocalWeather();
   }, []);
 
@@ -49,7 +48,6 @@ function Home() {
     setSunsetTimeStamp(data.sys.sunset * 1000);
     sunriseTime = new Date(sunriseTimeStamp);
     sunsetTime = new Date(sunsetTimeStamp);
-    console.log(data.sys.sunset);
   }
 
   async function getHourlyWeatherData(lat, lng) {
@@ -73,8 +71,7 @@ function Home() {
           <div className="cardContainer">
             <Card
               className="weatherCard1"
-              style={{ backgroundImage: "url(" + tempCardBackground + ")" }}
-            >
+              style={{ backgroundImage: "url(" + tempCardBackground + ")" }}>
               <Card.Body>
                 <div className="imageContainer">
                   {localWeatherData.data ? (
@@ -148,8 +145,7 @@ function Home() {
                     </ListGroup.Item>
                     <ListGroup.Item
                       id="listGroups1"
-                      className="d-flex justify-content-between"
-                    >
+                      className="d-flex justify-content-between">
                       <span>Visibility</span>{" "}
                       {localWeatherData.data
                         ? localWeatherData.data.visibility / 100
@@ -189,8 +185,7 @@ function Home() {
                     </ListGroup.Item>
                     <ListGroup.Item
                       id="listGroups2"
-                      className="d-flex justify-content-between"
-                    >
+                      className="d-flex justify-content-between">
                       <span>Sunset</span>
                       {sunsetTime.getHours() > 12
                         ? sunsetTime.getHours() - 12
